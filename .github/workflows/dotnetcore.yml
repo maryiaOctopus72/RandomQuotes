@@ -28,9 +28,7 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: |-
-          3.1.x
-          5.0.x
-          6.0.x
+          8.0.x
     - name: Install GitVersion
       uses: gittools/actions/gitversion/setup@v0.9.14
       with:
@@ -51,7 +49,7 @@ jobs:
       run: dotnet list package > dependencies.txt
       shell: bash
     - name: Collect Dependencies
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: Dependencies
         path: dependencies.txt
@@ -59,7 +57,7 @@ jobs:
       run: dotnet list package --outdated > dependencyUpdates.txt
       shell: bash
     - name: Collect Dependency Updates
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: Dependencies Updates
         path: dependencyUpdates.txt
