@@ -36,10 +36,6 @@ jobs:
     - id: determine_version
       name: Determine Version
       uses: gittools/actions/gitversion/execute@v4.1.0
-    - name: Install Octopus Deploy CLI
-      uses: OctopusDeploy/install-octopus-cli-action@v1
-      with:
-        version: latest
     - name: Install Dependencies
       run: dotnet restore
       shell: bash
@@ -143,28 +139,3 @@ jobs:
         draft: 'false'
         prerelease: 'false'
         target_commitish: ${{ github.sha }}
-    - name: Push packages to Octopus Deploy
-      uses: OctopusDeploy/push-package-action@v2
-      env:
-        OCTOPUS_API_KEY: ${{ secrets.OCTOPUS_API_TOKEN }}
-        OCTOPUS_HOST: ${{ secrets.OCTOPUS_SERVER_URL }}
-      with:
-        packages: ${{ steps.package.outputs.artifacts }}
-        overwrite_mode: OverwriteExisting
-    - name: Generate Octopus Deploy build information
-      uses: OctopusDeploy/push-build-information-action@v1
-      env:
-        OCTOPUS_API_KEY: ${{ secrets.OCTOPUS_API_TOKEN }}
-        OCTOPUS_HOST: ${{ secrets.OCTOPUS_SERVER_URL }}
-      with:
-        version: ${{ steps.determine_version.outputs.semVer }}
-        packages: RandomQuotes
-        overwrite_mode: OverwriteExisting
-    - name: Create Octopus Release
-      uses: OctopusDeploy/create-release-action@v1
-      with:
-        api_key: ${{ secrets.OCTOPUS_API_TOKEN }}
-        project: RandomQuotes
-        server: ${{ secrets.OCTOPUS_SERVER_URL }}
-        deploy_to: Development
-        packages: ${{ steps.package.outputs.versions_new_line }}
