@@ -36,8 +36,6 @@ jobs:
     - id: determine_version
       name: Determine Version
       uses: gittools/actions/gitversion/execute@v4.1.0
-      with:
-        overrideConfig: mode=Mainline
     - name: Install Octopus Deploy CLI
       uses: OctopusDeploy/install-octopus-cli-action@v1
       with:
