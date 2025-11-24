@@ -33,3 +33,17 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
+- task: OctopusPack@4
+  inputs:
+    PackageId: 'Random Quotes ADO'
+    PackageFormat: 'NuPkg'
+    PackageVersion: '1.0.$(Build.BuildId)'
+    SourcePath: '$(build.artifactstagingdirectory)\RandomQuotes'
+
+- task: OctopusPack@4
+  inputs:
+    PackageId: 'random quotes ado zip'
+    PackageFormat: 'Zip'
+    PackageVersion: '1.0.$(Build.BuildId)'
+    SourcePath: '$(build.artifactstagingdirectory)\RandomQuotes'
+
