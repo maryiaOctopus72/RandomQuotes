@@ -36,14 +36,14 @@ steps:
 
 - task: OctopusPack@4
   inputs:
-    PackageId: 'Random Quotes ADO'
+    PackageId: 'RandomQuotesADO'
     PackageFormat: 'NuPkg'
     PackageVersion: '1.0.$(Build.BuildId)'
     SourcePath: '$(Build.SourcesDirectory)\RandomQuotes'
 
 - task: OctopusPack@4
   inputs:
-    PackageId: 'random quotes ado zip'
+    PackageId: 'RandomQuotesADOzip'
     PackageFormat: 'Zip'
     PackageVersion: '1.0.$(Build.BuildId)'
     SourcePath: '$(Build.SourcesDirectory)\RandomQuotes'
@@ -53,6 +53,6 @@ steps:
     OctoConnectedServiceName: 'octopus'
     Space: 'maryia'
     Packages: |
-      RandomQuotes.1.0.$(Build.BuildId).nupkg
-      RandomQuotes.1.0.$(Build.BuildId).zip
+      RandomQuotesADO.1.0.$(Build.BuildId).nupkg
+      RandomQuotesADOzip.1.0.$(Build.BuildId).zip
     Replace: 'true'
