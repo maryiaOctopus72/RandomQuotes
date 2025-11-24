@@ -56,3 +56,11 @@ steps:
       RandomQuotesADO.1.0.$(Build.BuildId).nupkg
       RandomQuotesADOzip.1.0.$(Build.BuildId).zip
     Replace: 'true'
+
+- task: OctopusBuildInformation@7
+  inputs:
+    OctoConnectedServiceName: 'octopus'
+    Space: 'maryia'
+    PackageIds: 'RandomQuotesADO'
+    PackageVersion: '1.0.$(Build.BuildId)'
+    Replace: 'true'
